@@ -50,7 +50,7 @@ for i in range(batch):
     a0=a0[shuffle]
     a0=a0[:minibatch]
     y=y[shuffle]
-    y=y[0:minibatch]
+    y=y[:minibatch]
     
     
     z1 = np.dot(a0,w1)

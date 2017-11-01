@@ -50,11 +50,15 @@ w1 = np.random.randn(a0.shape[1],y.shape[1])
 #    
 # backprop + minibatch SGD
 for i in range(batch):
-    #only use minibatch number of data 
+    # shuffle for all training data
     arr=np.random.permutation(a0.shape[0])
+    # apply shuffle for a0
     a0=a0[arr]
+    # take the 0:minibatch
     a0=a0[:minibatch]
+    # apply shuffle for y
     y=y[arr]
+    # take the 0:minibatch
     y=y[:minibatch]
     
     z1=np.dot(a0,w1)
