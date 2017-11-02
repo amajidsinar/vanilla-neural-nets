@@ -49,36 +49,26 @@ w1 = np.random.randn(a0.shape[1],y.shape[1])
 #
 #    
 # backprop + minibatch SGD
-for i in range(batch):
-    # shuffle for all training data
-    arr=np.random.permutation(a0.shape[0])
-    # apply shuffle for a0
-    a0=a0[arr]
-    # take the 0:minibatch
-    a0=a0[:minibatch]
-    # apply shuffle for y
-    y=y[arr]
-    # take the 0:minibatch
-    y=y[:minibatch]
-    
-    z1=np.dot(a0,w1)
-    a1 = sigmoid(z1)
-    err1 = ((a1-y)/minibatch)*sigmoid_grad(z1)
-    w1 -= alpha * np.dot(a0.T,err1)
+# backprop + minibatch SGD
+for iter in range(batch):
+    error = 0
+#    only use minibatch number of data 
+    for i in range(0,X.shape[0]//minibatch,minibatch):
+        batch_x=X[i:i+minibatch]
+        batch_y=y[i:i+minibatch]
+            
+        a0 = batch_x    
+        z1 = np.dot(a0,w1)
+        a1 = sigmoid(z1)
+
+        #update w2 first
+        err1 = ((a1-batch_y)/minibatch)*sigmoid(z1)
+        w1 -= alpha * np.dot(a0.T,err1)
+        
+        error += (np.sum(np.abs(err1)))
+    sys.stdout.write("\rIter:" + str(iter) + " Loss:" + str(error))
+    if(iter % 100 == 99):
+        print("")
     
 
-#a0 = X 
-#y_predict = np.dot(a0,w1)
-#
-#arr = np.arange(X.shape[0])
-#np.random.shuffle(arr)
-#a0=a0[arr]
-#a0=a0[:minibatch]
-#y=y[arr]
-#y=y[:minibatch]
-#    
-#z1=np.dot(a0,w1)
-#a1 = sigmoid(z1)
-#err1 = ((a1-y)/minibatch)*sigmoid_grad(z1)
-#w1 -= alpha * np.dot(a0.T,err1)
 
