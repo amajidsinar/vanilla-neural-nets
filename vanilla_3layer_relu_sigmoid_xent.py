@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov  3 12:29:25 2017
+
+@author: amajidsinar
+"""
+
 # -*- coding: utf-8 -*-
 
 import numpy as np
@@ -29,11 +37,12 @@ def sigmoid(z):
 def sigmoid_grad(z):
     return sigmoid(z) * (1-sigmoid(z))
 
+
 # to ensure that generated random numbers are the same no matter how many times you run this
 np.random.seed(1)
 
 alpha = 0.01
-batch = 1000
+batch = 50000
 minibatch = 64
 
 a0 = X 
@@ -58,7 +67,7 @@ for iter in range(batch):
         a2 = sigmoid(z2)
             
         #update w2 first
-        err2 = ((a2-batch_y)/minibatch)*sigmoid_grad(z2)
+        err2 = ((a2-batch_y)/(minibatch*a2*(1-a2)))*sigmoid_grad(z2)
         w2 -= alpha * np.dot(a1.T,err2)
             
             #update w1
@@ -70,8 +79,9 @@ for iter in range(batch):
     if(iter % 100 == 99):
         print("")
 
-
-    
+#a1 = relu(np.dot(X,w1))
+#a2 = sigmoid(np.dot(a1,w2))
+#    
 
 
 
