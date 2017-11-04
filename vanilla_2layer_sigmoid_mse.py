@@ -7,6 +7,7 @@ Created on Sat Oct 28 22:08:40 2017
 """
 
 import numpy as np
+import sys
 
 
 X = np.array([  [0,0,1],
@@ -53,7 +54,7 @@ w1 = np.random.randn(a0.shape[1],y.shape[1])
 for iter in range(batch):
     error = 0
 #    only use minibatch number of data 
-    for i in range(0,X.shape[0]//minibatch,minibatch):
+    for i in range(0,X.shape[0],minibatch):
         batch_x=X[i:i+minibatch]
         batch_y=y[i:i+minibatch]
             

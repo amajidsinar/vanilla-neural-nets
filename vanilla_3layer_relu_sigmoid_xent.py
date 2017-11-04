@@ -56,7 +56,7 @@ w2 = np.random.randn(hidden_neuron,1)
 for iter in range(batch):
     error = 0
 #    only use minibatch number of data 
-    for i in range(0,X.shape[0]//minibatch,minibatch):
+    for i in range(0,X.shape[0],minibatch):
         batch_x=X[i:i+minibatch]
         batch_y=y[i:i+minibatch]
             
@@ -79,9 +79,9 @@ for iter in range(batch):
     if(iter % 100 == 99):
         print("")
 
-#a1 = relu(np.dot(X,w1))
-#a2 = sigmoid(np.dot(a1,w2))
-#    
+a1 = relu(np.dot(X,w1))
+a2 = sigmoid(np.dot(a1,w2))
+
 
 
 

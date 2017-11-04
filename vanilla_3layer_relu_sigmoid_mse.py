@@ -47,7 +47,7 @@ w2 = np.random.randn(hidden_neuron,1)
 for iter in range(batch):
     error = 0
 #    only use minibatch number of data 
-    for i in range(0,X.shape[0]//minibatch,minibatch):
+    for i in range(0,X.shape[0],minibatch):
         batch_x=X[i:i+minibatch]
         batch_y=y[i:i+minibatch]
             
